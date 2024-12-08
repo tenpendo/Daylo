@@ -1,0 +1,286 @@
+DAYLO PROGRAMMING LANGUAGE DOCUMENTATION
+Version 0.1.0.0.0
+=====================================
+
+Table of Contents:
+1. Overview
+2. Installation
+3. Language Features
+4. Usage Guide
+5. Technical Documentation
+6. Examples
+7. Project Structure
+
+1. OVERVIEW
+=====================================
+Daylo is a LISP-like programming language interpreter written in C. It provides an interactive environment 
+for writing and executing code with features common to functional programming languages.
+
+Key Features:
+- Interactive REPL (Read-Eval-Print Loop)
+- Dynamic typing
+- First-class functions with closures
+- Lexical scoping
+- Error handling
+- File loading capabilities
+- Mathematical and logical operations
+- List manipulation
+
+2. INSTALLATION
+=====================================
+
+Prerequisites:
+-------------
+- GCC or compatible C compiler
+- Make (optional)
+- For Unix-like systems: libedit-dev
+
+Windows Installation:
+-------------------
+1. Ensure GCC is installed
+2. Run compile.bat:
+   .\compile.bat
+
+Unix-like Systems (Linux/macOS):
+------------------------------
+1. Install dependencies:
+   Ubuntu/Debian: sudo apt-get install build-essential libedit-dev
+   macOS: brew install libedit
+
+2. Compile using make:
+   make
+
+3. LANGUAGE FEATURES
+=====================================
+
+Data Types:
+----------
+1. Numbers (Integer and Decimal)
+2. Strings
+3. Symbols
+4. Lists (Q-expressions and S-expressions)
+5. Functions (Built-in and Lambda)
+
+Built-in Functions:
+-----------------
+Mathematical Operations:
+- + (addition)
+- - (subtraction)
+- * (multiplication)
+- / (division)
+- % (modulo)
+- min
+- max
+
+List Operations:
+- list
+- head
+- tail
+- join
+- eval
+
+Comparison Operators:
+- > (greater than)
+- < (less than)
+- >= (greater or equal)
+- <= (less or equal)
+- == (equal)
+- != (not equal)
+
+Logical Operators:
+- && (and)
+- || (or)
+- ! (not)
+
+Variable Operations:
+- def (define global)
+- = (assign local)
+
+I/O Operations:
+- print
+- error
+- load
+
+4. USAGE GUIDE
+=====================================
+
+Starting the REPL:
+----------------
+Run: ./daylo
+
+Basic Operations:
+---------------
+; Numbers
+Daylo> 42
+42
+Daylo> 3.14
+3.14
+
+; Strings
+Daylo> "Hello, World!"
+"Hello, World!"
+
+; Basic Math
+Daylo> (+ 1 2 3)
+6
+Daylo> (* 4 5)
+20
+
+Variables:
+---------
+; Global definition
+Daylo> (def {x} 100)
+()
+
+; Local assignment
+Daylo> (= {y} 200)
+()
+
+Functions:
+---------
+; Define a function
+Daylo> (def {add-mul} (\ {x y} {+ x (* y 2)}))
+()
+
+; Use the function
+Daylo> (add-mul 10 5)
+20
+
+Lists:
+-----
+Daylo> (list 1 2 3)
+{1 2 3}
+Daylo> (head {1 2 3})
+{1}
+Daylo> (tail {1 2 3})
+{2 3}
+Daylo> (join {1 2} {3 4})
+{1 2 3 4}
+
+Conditional Logic:
+---------------
+Daylo> (if (> 5 3) {print "yes"} {print "no"})
+"yes"
+
+File Loading:
+-----------
+Daylo> (load "myprogram.dl")
+
+5. TECHNICAL DOCUMENTATION
+=====================================
+
+Project Components:
+-----------------
+1. lval (Value System):
+   - Handles different data types
+   - Memory management
+   - Type conversion
+
+2. lenv (Environment):
+   - Variable storage
+   - Scope management
+   - Function binding
+
+3. builtins:
+   - Core function implementation
+   - Standard library
+
+4. mpc (Parser):
+   - Syntax parsing
+   - Grammar rules
+   - Error reporting
+
+Memory Management:
+----------------
+- Automatic garbage collection
+- Resource cleanup
+- Memory leak prevention
+
+Error Handling:
+-------------
+- Comprehensive error messages
+- Runtime error catching
+- Type checking
+
+6. EXAMPLES
+=====================================
+
+Factorial Function:
+-----------------
+Daylo> (def {fact} (\ {n} {
+    if (== n 0)
+        {1}
+        {* n (fact (- n 1))}
+}))
+()
+Daylo> (fact 5)
+120
+
+List Processing:
+--------------
+Daylo> (def {lst} {1 2 3 4 5})
+()
+Daylo> (head lst)
+{1}
+Daylo> (tail lst)
+{2 3 4 5}
+
+Error Handling:
+-------------
+Daylo> (/ 1 0)
+Error: Division By Zero!
+
+Daylo> (head {})
+Error: Function 'head' passed {} for argument 0.
+
+7. PROJECT STRUCTURE
+=====================================
+
+Directory Layout:
+---------------
+Daylo/
+├── docs/
+│ ├── daylo_documentation.txt # Comprehensive documentation
+├── include/
+│ ├── builtins.h # Built-in function declarations
+│ ├── lenv.h # Environment declarations
+│ ├── lval.h # Value type declarations
+│ ├── mpc.h # Parser declarations
+│ └── types.h # Type definitions
+├── src/
+│ ├── builtins.c # Built-in function implementations
+│ ├── lenv.c # Environment implementations
+│ ├── lval.c # Value type implementations
+│ ├── mpc.c # Parser implementations
+│ └── project.c # Main program entry
+├── README.md # Project overview
+├── Makefile # Unix build script
+└── compile.bat # Windows build script
+
+File Descriptions:
+----------------
+
+docs/
+daylo_documentation.txt: Complete technical documentation
+
+include/
+builtins.h: Declarations for built-in functions
+lenv.h: Environment and scope management declarations
+lval.h: Value type system declarations
+mpc.h: Parser functionality declarations
+types.h: Core type definitions
+
+src/
+builtins.c: Implementation of all built-in functions
+lenv.c: Environment management implementation
+lval.c: Value type system implementation
+mpc.c: Parser implementation
+project.c: Main program and REPL implementation
+
+Root Directory
+README.md: Quick start guide and project overview
+Makefile: Build instructions for Unix-like systems
+compile.bat: Build script for Windows systems
+
+=====================================
+END OF DOCUMENTATION
